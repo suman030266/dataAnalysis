@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html data-use-rem="750" lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>数据采集</title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="x5-page-mode" content="no-title"/>
+    <link rel="stylesheet" type="text/css" href="../css/public.css">
+</head>
+<body>
+    <div>
+        <form action="http://localhost:9003/getExcel" type="get" id="form" enctype="multipart/form-data">
+            <input type="file" name="excel"/>
+            <input value="生成折线图" type="button" id="btn" />
+        </form>
+        <div id="map-box"></div>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/2.2.1/jquery.js"></script>
+    <script src="https://cdn.bootcss.com/echarts/4.1.0.rc2/echarts-en.common.min.js"></script>
+    <script src="../js/index.js"></script>
+</body>
+</html>

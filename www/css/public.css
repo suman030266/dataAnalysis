@@ -1,0 +1,14 @@
+body{
+	color:red;
+}
+#map-box{
+	width: 80%;
+	margin: 20px auto;
+	overflow: hidden;
+}
+.map{
+	width: 600px;
+	height: 300px;
+	margin: 10px;
+	float: left;
+}
