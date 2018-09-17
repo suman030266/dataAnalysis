@@ -1,14 +1,76 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+ul, ol{
+	list-style: none;
+}
 body{
-	color:red;
+	/* color:red; */
 }
 #map-box{
-	width: 80%;
+	width: 90%;
 	margin: 20px auto;
 	overflow: hidden;
 }
+.file{
+	position: absolute;
+	left: -1000px;
+	top: -1000px;
+}
 .map{
-	width: 600px;
+	width: 700px;
 	height: 300px;
 	margin: 10px;
 	float: left;
+}
+.btn{
+	height: 60px;
+	width: 100px;
+	box-sizing: border-box;
+	text-align:center;
+    line-height: 60px;
+    position: relative;
+    cursor: pointer;
+    color: #888;
+    background: #fafafa;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+.btn:hover {
+    color: #0376ba;
+    background-color: #acdbf7;
+    border-color: #65acd6;
+}
+.call{
+	position: fixed;
+	right: 0;
+	bottom: 0;
+	display: none;
+	height: 40px;
+	overflow: scroll;
+	border: 1px solid #000;
+}
+.call span.tip-title{
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	display: block;
+	background-color: red;
+	cursor: pointer;
+}
+.call ul li{
+	border-bottom: 1px solid #000;
+	background-color: #f5efef;
+	height: 30px;
+	line-height: 30px;
+}
+.call ul li span{
+
+}
+.call ul li i{
+	
+}
+.call ul li b{
+	
 }

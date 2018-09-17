@@ -14,10 +14,15 @@
 <body>
     <div>
         <form action="http://localhost:9003/getExcel" type="get" id="form" enctype="multipart/form-data">
-            <input type="file" name="excel"/>
-            <input value="生成折线图" type="button" id="btn" />
+            <input class="file" name="excel" type="file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
+            <!-- <input value="上传文件" type="button" class="btn" id="btn" /> -->
+            <div class="btn" id="btn" >上传文件</div>
         </form>
         <div id="map-box"></div>
+    </div>
+    <div class="call" id="call">
+        <span class="tip-title">查看报警数据</span>
+        <ul></ul>
     </div>
     <script src="https://cdn.bootcss.com/jquery/2.2.1/jquery.js"></script>
     <script src="https://cdn.bootcss.com/echarts/4.1.0.rc2/echarts-en.common.min.js"></script>

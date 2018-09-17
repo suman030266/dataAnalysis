@@ -1,29 +1,12 @@
 $(()=>{
     let n = 1;
-    let $mapBox = $('#map-box');
-    $('#btn').on('click', ()=>{
-        $.ajax({
-            url: '/getExcel',
-            type: 'POST',
-            cache: false,
-            data: new FormData($('#form')[0]),
-            processData: false,
-            contentType: false,
-            dataType: 'json',
-            success(res){
-                let {data} = res;
-                let arr = abc(data);
-                arr.forEach(item=>{
-                    drawCharts(item);
-                });
-            },
-            complete(){
-                console.log('complete');
-            }
-        });
-    });
-    function abc(data){
-        console.log(data);
+    let minPower = 200;
+    let aaArr = [];
+    let $mapBox = $('#map-box'),
+        $btn = $('#btn'),
+        $file = $('input[name="excel"]'),
+        $call = $('.call');
+    function fn(data){
         let res = [];
         let obj = {};
         Object.keys(data).forEach(item =>{
@@ -42,9 +25,17 @@ $(()=>{
         });
         return res;
     }
-    // let date = ["2018-09-04", "2018-09-05", "2018-09-06", "2018-09-07", "2018-09-08"]
-    // let num = [3970, 4171, 4357, 4301, 3437];
     function drawCharts(obj){
+        let {title, date, num} = obj;
+        num.forEach((item, index)=>{
+            if(item <= minPower){
+                aaArr.push({
+                    title,
+                    num: item,
+                    date: date[index]
+                });
+            }
+        });
         n ++;
         let ele = document.createElement('div');
         ele.id = 'map' + n;
@@ -53,7 +44,7 @@ $(()=>{
         let myChart = echarts.init(ele);
         let option = {
             title: {
-                text: obj.title,
+                text: title,
                 subtext: ''
             },
             tooltip: {
@@ -62,19 +53,19 @@ $(()=>{
             xAxis:  {
                 type: 'category',
                 boundaryGap: false,
-                data: obj.date
+                data: date
             },
             yAxis: {
                 type: 'value',
                 axisLabel: {
-                    formatter: '{value} °C'
+                    formatter: '{value} 卡'
                 }
             },
             series: [
                 {
                     // name:'最高气温',
                     type:'line',
-                    data: obj.num,
+                    data: num,
                     markPoint: {
                         data: [
                             {type: 'max', name: '最大值'},
@@ -91,53 +82,55 @@ $(()=>{
         };
         myChart.setOption(option);
     }
+    function getData(){
+        $.ajax({
+            url: '/getExcel',
+            type: 'POST',
+            cache: false,
+            data: new FormData($('#form')[0]),
+            processData: false,
+            contentType: false,
+            dataType: 'json',
+            success(res){
+                let {data} = res;
+                let arr = fn(data);
+                arr.forEach(item=>{
+                    drawCharts(item);
+                });
+                calls();
+            },
+            complete(){
+                // console.log('complete');
+            }
+        });
+    }
+    function calls(){
+        console.log(aaArr);
+        if(aaArr.length){
+            $call.show();
+            let str = ``;
+            aaArr.forEach(item =>{
+                str += `<li><b>${item.title}</b> / <span>${item.date}</span> / 数量 <i>${item.num}</i></li>`;
+            });
+            $call.find('ul').append(str);
+        }else{
+            $call.hide();
+        }
+    }
+    $file.on('change', (e)=>{
+        if(e.target.value){
+            getData();
+        }
+    });
+    $btn.on('click', ()=>{
+        $file.click();
+    });
+    $('span.tip-title').on('click', ()=>{
+        console.log()
+        if($call.hasClass('open')){
+            $call.removeClass('open').animate({height: '40px'});
+        }else{
+            $call.addClass('open').animate({height: '300px'});
+        }
+    });
 });
-
-
-
-
-
-
-// function drawCharts(date, num){
-//     let myChart = echarts.init(document.getElementById('map'));
-//     let option = {
-//         title: {
-//             text: '[矿点]鄂尔多斯市东辰煤炭有限责任公司（3500大卡低硫煤）',
-//             subtext: ''
-//         },
-//         tooltip: {
-//             trigger: 'axis'
-//         },
-//         xAxis:  {
-//             type: 'category',
-//             boundaryGap: false,
-//             data: date
-//         },
-//         yAxis: {
-//             type: 'value',
-//             axisLabel: {
-//                 formatter: '{value} °C'
-//             }
-//         },
-//         series: [
-//             {
-//                 // name:'最高气温',
-//                 type:'line',
-//                 data: num,
-//                 markPoint: {
-//                     data: [
-//                         {type: 'max', name: '最大值'},
-//                         {type: 'min', name: '最小值'}
-//                     ]
-//                 },
-//                 markLine: {
-//                     data: [
-//                         {type: 'average', name: '平均值'}
-//                     ]
-//                 }
-//             }
-//         ]
-//     };
-//     myChart.setOption(option);
-// }
-// drawCharts(date, num);

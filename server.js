@@ -30,7 +30,7 @@ app.all('/getExcel', (req, res)=>{
     };
     // analysisData(excelSheetArr[0]) 整合后的数据
 
-    let datasss = aaa(excelSheetArr[0]);
+    let datasss = getPoint(excelSheetArr[0]);
     // drawCharts(datasss.data[0]);
 
     resData.data = drawCharts(datasss.data[0]);
@@ -134,7 +134,7 @@ function analysisData(arr){
     }
     return res;
 }
-function aaa(obj){
+function getPoint(obj){
     let res = {},
         regOrePoint = /^\s+\[矿点\]/,
         regDate = /^\s+\[收货日期\]/,
