@@ -49,10 +49,12 @@ body{
 	display: none;
 	height: 40px;
 	overflow: scroll;
-	/* border: 1px solid #000; */
 	background-color: #4b4b4b;
 	color: #fff;
-    min-width: 500px;
+    width: 150px;
+}
+.call.open{
+	min-width: 500px;
 }
 .call span.tip-title{
 	height: 40px;
