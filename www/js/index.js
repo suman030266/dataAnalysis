@@ -25,7 +25,7 @@ $(()=>{
         });
         return res;
     }
-    function drawCharts(obj){
+    function drawCharts(obj, index){
         let {title, date, num} = obj;
         num.forEach((item, index)=>{
             if(item <= minPower){
@@ -94,8 +94,8 @@ $(()=>{
             success(res){
                 let {data} = res;
                 let arr = fn(data);
-                arr.forEach(item=>{
-                    drawCharts(item);
+                arr.forEach((item, index)=>{
+                    drawCharts(item, index);
                 });
                 calls();
             },

@@ -49,28 +49,39 @@ body{
 	display: none;
 	height: 40px;
 	overflow: scroll;
-	border: 1px solid #000;
+	/* border: 1px solid #000; */
+	background-color: #4b4b4b;
+	color: #fff;
+    min-width: 500px;
 }
 .call span.tip-title{
 	height: 40px;
 	line-height: 40px;
 	text-align: center;
 	display: block;
-	background-color: red;
+	color: #fff;
 	cursor: pointer;
+	background-color: #efe204;
+	font-size: 20px;
+    font-family: monospace;
+}
+.call ul{
+	padding-left: 30px;
 }
 .call ul li{
-	border-bottom: 1px solid #000;
-	background-color: #f5efef;
+	border-bottom: 1px solid #6e6e6e;
 	height: 30px;
 	line-height: 30px;
 }
 .call ul li span{
-
+	color: #c7c7c7;
 }
 .call ul li i{
-	
+	background-color: #fe483d;
+	padding: 4px;
+	margin-left: 20px;
+	font-style: normal;
 }
 .call ul li b{
-	
+	width: 200px;
 }
