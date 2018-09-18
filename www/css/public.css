@@ -54,7 +54,11 @@ body{
     width: 150px;
 }
 .call.open{
-	min-width: 500px;
+	/* min-width: 500px; */
+}
+.call.open ul{
+	/* min-width: 500px; */
+	display: block;
 }
 .call span.tip-title{
 	height: 40px;
@@ -64,11 +68,12 @@ body{
 	color: #fff;
 	cursor: pointer;
 	background-color: #efe204;
-	font-size: 20px;
+	font-size: 16px;
     font-family: monospace;
 }
 .call ul{
 	padding-left: 30px;
+	display: none;
 }
 .call ul li{
 	border-bottom: 1px solid #6e6e6e;
@@ -86,4 +91,25 @@ body{
 }
 .call ul li b{
 	width: 200px;
+}
+.mask,
+.loading{
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.mask{
+	background-color: rgba(0, 0, 0, .3);
+}
+.loading{
+	text-align: center;
+}
+.loading img{
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin: -64px 0 0 -64px;
 }

@@ -91,16 +91,22 @@ $(()=>{
             processData: false,
             contentType: false,
             dataType: 'json',
+            beforeSend(){
+                $('body').append('<div class="mask"></div><div class="loading"><img src="../imgs/loading.gif" /></div>');
+            },
             success(res){
                 let {data} = res;
                 let arr = fn(data);
+                $mapBox.html('');
+                aaArr = [];
                 arr.forEach((item, index)=>{
                     drawCharts(item, index);
                 });
                 calls();
             },
             complete(){
-                // console.log('complete');
+                $('.mask').remove();
+                $('.loading').remove();
             }
         });
     }
@@ -122,15 +128,28 @@ $(()=>{
             getData();
         }
     });
-    $btn.on('click', ()=>{
+    $btn.on('click', (e)=>{
         $file.click();
+        // e.stopPropergation();
     });
-    $('span.tip-title').on('click', ()=>{
-        console.log()
+    $('span.tip-title').on('click', (e)=>{
         if($call.hasClass('open')){
-            $call.removeClass('open').animate({height: '40px'});
+            closeCall();
         }else{
-            $call.addClass('open').animate({height: '300px'});
+            $call.addClass('open').animate({
+                height: '300px',
+                minWidth: '500px'
+            });
         }
+        return false;
     });
+    $(document).on('click', ()=>{
+        closeCall();
+    });
+    function closeCall(){
+        $call.removeClass('open').animate({
+            height: '40px',
+            minWidth: '150px'
+        }, 200);
+    }
 });
